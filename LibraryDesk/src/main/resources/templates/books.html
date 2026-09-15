@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/style.css">
+    <title>LibraryDesk - Books</title>
+</head>
+<body>
+
+<nav>
+    <h2>LibraryDesk</h2>
+
+    <div>
+        <a href="/">Home</a>
+        <a href="/books">Books</a>
+        <a href="/students">Students</a>
+        <a href="/issue">Issue Book</a>
+        <a href="/return">Return Book</a>
+        <a href="/records">Records</a>
+        <a href="/login">Login</a>
+    </div>
+</nav>
+<section class="books">
+
+    <h1>Library Books</h1>
+
+    <p>Browse and manage the books available in the library.</p>
+
+    <form class="book-search" action="/books" method="get">
+        <input type="text" name="search" placeholder="Search Books ....">
+        <button type="submit">Search</button>
+    </form>
+    <div th:if="${success}" class="success-message">
+        <p th:text="${success}"></p>
+    </div>
+    <div class="book-cards">
+
+        <div class="book-card" th:each="book : ${books}">
+
+            <h3 th:text="${book.title}"></h3>
+
+            <p th:text="'Author: ' + ${book.author}"></p>
+
+            <p th:text="'ISBN: ' + ${book.isbn}"></p>
+
+            <p th:text="'Available Copies: ' + ${book.copies}"></p>
+            <span class="book-status"
+                  th:classappend="${book.copies > 0 ? '' : ' unavailable'}"
+                  th:text="${book.copies > 0 ? 'Available' : 'Out of Stock'}">
+</span>
+            <a th:if="${book.copies > 0}"
+               href="/issue">
+                Issue Book
+            </a>
+
+            <a th:href="@{/books/edit/{id}(id=${book.id})}">
+                Edit Book
+            </a>
+            <form th:action="@{/books/delete/{id}(id=${book.id})}" method="post">
+
+                <input type="hidden"
+                       th:name="${_csrf.parameterName}"
+                       th:value="${_csrf.token}">
+
+                <button type="submit">Delete Book</button>
+
+            </form>
+
+            <a th:unless="${book.copies > 0}"
+               class="disabled">
+                Unavailable
+            </a>
+        </div>
+
+    </div>
+<div class="add-book">
+    <h2>Add New Book</h2>
+
+    <form action="/books/add" method="post">
+
+        <input type="hidden"
+               th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}">
+
+        <input type="text"
+               name="title"
+               placeholder="Book Title"
+               required>
+
+        <input type="text"
+               name="author"
+               placeholder="Author"
+               required>
+
+        <input type="text"
+               name="isbn"
+               placeholder="ISBN"
+               required>
+
+        <input type="number"
+               name="copies"
+               placeholder="Number of Copies"
+               min="1"
+               required>
+
+        <button type="submit">Add Book</button>
+
+    </form>
+
+</div>
+</section>
+<footer>
+
+    <h3>LibraryDesk</h3>
+
+    <p>Making library management simple and organized.</p>
+
+    <div>
+        <a href="/">Home</a>
+        <a href="/books">Books</a>
+        <a href="/students">Students</a>
+        <a href="/login">Login</a>
+    </div>
+
+    <p>© 2026 LibraryDesk. All rights reserved.</p>
+
+</footer>
+
+</body>
+</html>
