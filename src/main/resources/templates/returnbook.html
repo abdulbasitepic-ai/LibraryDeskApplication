@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/style.css">
+
+  <title>Return Book</title>
+</head>
+<body>
+
+<nav>
+  <h2>LibraryDesk</h2>
+
+  <div>
+    <a href="/">Home</a>
+    <a href="/books">Books</a>
+    <a href="/students">Students</a>
+    <a href="/issue">Issue Book</a>
+    <a href="/return">Return Book</a>
+    <a href="/records">Records</a>
+    <a href="/login">Login</a>
+  </div>
+</nav>
+
+<section class="returnbook">
+
+  <div th:if="${success}"
+       class="success-message"
+       th:text="${success}">
+  </div>
+
+  <h1>Return Book</h1>
+  <p>Select a borrowed book to return.</p>
+
+  <form action="/return" method="post">
+    <label for="recordId">Select Borrowed Book</label>
+
+    <select id="recordId" name="recordId" required>
+
+      <option value="">Select a book</option>
+
+      <option th:each="record : ${records}"
+              th:value="${record.id}"
+              th:text="${record.student.studentName + ' - ' + record.book.title}">
+      </option>
+
+    </select>
+
+    <button type="submit">Return Book</button>
+
+  </form>
+</section>
+<footer>
+
+  <h3>LibraryDesk</h3>
+
+  <p>Making library management simple and organized.</p>
+
+  <div>
+    <a href="/">Home</a>
+    <a href="/books">Books</a>
+    <a href="/students">Students</a>
+    <a href="/login">Login</a>
+  </div>
+
+  <p>© 2026 LibraryDesk. All rights reserved.</p>
+
+</footer>
+</body>
+</html>

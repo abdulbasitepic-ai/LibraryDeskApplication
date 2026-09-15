@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Issue Book </title>
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+
+<nav>
+    <h2>LibraryDesk</h2>
+
+    <div>
+        <a href="/">Home</a>
+        <a href="/books">Books</a>
+        <a href="/students">Students</a>
+        <a href="/issue">Issue Book</a>
+        <a href="/return">Return Book</a>
+        <a href="/records">Records</a>
+        <a href="/login">Login</a>
+    </div>
+</nav>
+
+<section class="issue-book">
+    <div th:if="${success}" class="success-message" th:text="${success}"></div>
+    <h1>Issue Book</h1>
+    <p>Select a book to issue.</p>
+
+    <form action="/issue" method="post">
+        <label for="book">Select Book</label>
+
+        <select id="book" name="book" required>
+            <option value="">Select a book</option>
+
+            <option th:each="book : ${books}"
+                    th:value="${book.id}"
+                    th:text="${book.title}">
+            </option>
+
+        </select>
+
+        <label for="student" >Select Student </label>
+        <select id="student" name="student" required>
+            <option value="">Select A Student</option>
+
+            <option th:each="student : ${students}"
+                    th:value="${student.studentId}"
+                    th:text="${student.studentName}">
+            </option>
+        </select>
+
+
+        <button type="submit">Issue Book</button>
+    </form>
+
+</section>
+<footer>
+
+    <h3>LibraryDesk</h3>
+
+    <p>Making library management simple and organized.</p>
+
+    <div>
+        <a href="/">Home</a>
+        <a href="/books">Books</a>
+        <a href="/students">Students</a>
+        <a href="/login">Login</a>
+    </div>
+
+    <p>© 2026 LibraryDesk. All rights reserved.</p>
+
+</footer>
+
+</body>
+</html>
