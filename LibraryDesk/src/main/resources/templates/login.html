@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login - LibraryDesk</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="login-container">
+    <h1>LibraryDesk</h1>
+
+    <p>Welcome back</p>
+
+
+    <form action="/login" method="post">
+        <input type="hidden"
+               th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}">
+        <label for="username">Username</label>
+        <input type="text"
+               id="username"
+               name="username"
+               placeholder="Enter your username"
+               required>
+
+        <label for="password">Password</label>
+        <input type="password"
+               id="password"
+               name="password"
+               placeholder="Enter your password"
+               required>
+
+        <button type="submit">Login</button>
+
+    </form>
+
+</div>
+
+
+</body>
+</html>
