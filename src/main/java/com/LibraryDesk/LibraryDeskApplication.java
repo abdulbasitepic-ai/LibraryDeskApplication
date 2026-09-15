@@ -11,4 +11,3 @@ public class LibraryDeskApplication {
 	}
 
 }
-cd "C:\Users\Basit\.vscode\java"
