@@ -28,6 +28,10 @@
     <p>Select a book to issue.</p>
 
     <form action="/issue" method="post">
+        <input type="hidden"
+               th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}">
+
         <label for="book">Select Book</label>
 
         <select id="book" name="book" required>
@@ -37,10 +41,10 @@
                     th:value="${book.id}"
                     th:text="${book.title}">
             </option>
-
         </select>
 
-        <label for="student" >Select Student </label>
+        <label for="student">Select Student</label>
+
         <select id="student" name="student" required>
             <option value="">Select A Student</option>
 
@@ -50,10 +54,8 @@
             </option>
         </select>
 
-
         <button type="submit">Issue Book</button>
     </form>
-
 </section>
 <footer>
 

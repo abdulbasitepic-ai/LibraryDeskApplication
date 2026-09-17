@@ -34,17 +34,20 @@
   <p>Select a borrowed book to return.</p>
 
   <form action="/return" method="post">
+
+    <input type="hidden"
+           th:name="${_csrf.parameterName}"
+           th:value="${_csrf.token}">
+
     <label for="recordId">Select Borrowed Book</label>
 
     <select id="recordId" name="recordId" required>
-
       <option value="">Select a book</option>
 
       <option th:each="record : ${records}"
               th:value="${record.id}"
               th:text="${record.student.studentName + ' - ' + record.book.title}">
       </option>
-
     </select>
 
     <button type="submit">Return Book</button>
